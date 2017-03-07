@@ -1,0 +1,43 @@
+<html ng-app="zoomcarToDo">
+<head>
+	<title>zoomcar Test To Do</title>
+	<link type="text/css" rel="stylesheet" href="css/zoomcarToDo.css" />
+	<script type="text/javascript" src="js/angular.min.js"></script>
+</head>
+<body>
+	<div class="mainContainer"  ng-controller="mainCtrl">	
+		<div class="contentHeader">
+			<div class="content">
+			<span class="mainText">Zoom car To Do list . (Welcome <a href="javascript:void(0)">{{todo.uname}}......</a>) 
+			<a href="javascript:void(0)" ng-click="todo.logout();">Logout</a></span>			
+			</div>
+		</div>
+		<div class="contentData">
+			<div class="content">
+				<went-well></went-well>			
+				<improvement></improvement>
+				<great-ideas></great-ideas>
+			</div>
+		</div>		
+		<script type="text/ng-template" id="wentWell.html">		
+			<div class="toDoCol">
+				<input type="text" id="wentWellInput" class="toDoText" ng-model="wentWell" placeholder="What went well ?" />
+				<div class="todoContent" id="wentWellArea"></div>
+			</div>
+		</script>
+		<script type="text/ng-template" id="improvement.html">		
+			<div class="toDoCol">
+				<input type="text" class="toDoText" id="improvementInput" ng-model="improved" placeholder="What could be improved ?" />
+				<div class="todoContent" id="improvedArea"></div>
+			</div>
+		</script>		
+		<script type="text/ng-template" id="greatIdeas.html">		
+			<div class="toDoCol">
+				<input type="text" class="toDoText" id="brilliantIdeaInput" ng-model="brilliantIdea" placeholder="A Brilliant idea to show" />
+				<div class="todoContent" id="greatIdeasArea"></div>
+			</div>
+		</script>		
+	</div>
+			<script type="text/javascript" src="js/zoomcarToDo.js"></script>
+</body>
+</html>						  

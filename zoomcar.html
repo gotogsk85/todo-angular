@@ -1,0 +1,100 @@
+<html ng-app="zoomcarAssignment">
+<head>
+	<title>zoomcar Test</title>
+	<link type="text/css" rel="stylesheet" href="css/zoomcarLogin.css" />
+	<script type="text/javascript" src="js/angular.min.js"></script>
+</head>
+<body>
+	<div class="mainContainer"  ng-controller="mainCtrl">		
+		<div class="content loginArea">
+			<div class="contentHeader contentPadding">
+				<span class="mainText" ng-if="zoomcar.loginForm">Zoomcar</span>
+				<span class="subText" ng-if="zoomcar.loginForm">Not a member yet? 
+					<a href="javascript:void(0)" class="registerText" ng-click="zoomcar.loginForm=false;">Register</a> now &mdash; it's fun and easy</span>
+				<span class="mainText" ng-if="!zoomcar.loginForm">Join Zoomcar Today</span>
+				<span class="subText" ng-if="!zoomcar.loginForm">It's free and always will be .If already a member then <a href="javascript:void(0)" ng-click="zoomcar.loginForm = true">Login</a></span>						
+			</div>
+			<div class="contentUserInput contentPadding">
+				<div class="loginRegisterCont">
+				  <login-form ng-if='zoomcar.loginForm'></login-form>				  
+				  <register-form ng-if='!zoomcar.loginForm' 
+								 func="zoomcar.setLoginRegisterForm()"></register-form>				  
+				</div>
+			</div>
+		</div>	
+	</div>
+	<script type="text/ng-template" id="login.html">		
+	   <form class="loginForm" name="loginForm" no-validate="no-validate">						
+			<div class="formElem loginError" ng-if="!zoomcar.loginStatus">Enter correct Login Credentials</div>
+			<div class="formElem" ng-class='{error:loginForm.loginUserName.$dirty && loginForm.loginUserName.$invalid}'>
+				<span class="inputElem">
+					<input type="text" name="loginUserName" ng-model="zoomcar.login.username" placeholder="Username" required="true" />
+				</span>
+				<span class="statusMessage" ng-if="loginForm.loginUserName.$dirty && loginForm.loginUserName.$invalid">
+					<span class="sprites"></span><span class="message">Required Field</span>						
+				</span>
+			</div>
+		  
+			<div class="formElem" ng-class='{error:loginForm.loginPwd.$dirty && loginForm.loginPwd.$invalid}'>
+				<span class="inputElem forgotPassword">
+					<input type="password" name="loginPwd" placeholder="Password" ng-model="zoomcar.login.password" required="true" />
+					<a href="javascript:void(0)" class="fPassText">Forgot Password ?</a>
+				</span>
+				<span class="statusMessage" ng-if="{error:loginForm.loginPwd.$dirty && loginForm.loginPwd.$invalid}">
+					<span class="sprites"></span><span class="message">Required Field</span>							
+				</span>
+			</div>
+			<div class="formElem rememberMe lastField">				
+				<a href="javascript:void(0)" class="loginRegButton" 
+				   ng-click='loginSubmit(loginForm.$valid)' 
+				   ng-class='{disabled:!loginForm.$valid}'>Login</a>
+			</div>				
+			
+			
+	   </form>	
+	</script>
+	<script type="text/ng-template" id="register.html">		
+	  <form class="registerForm" name="registerForm" no-validate="no-validate">
+		<div class="formElem" 
+			ng-class='{error:registerForm.regEmail.$dirty && registerForm.regEmail.$invalid}'>
+			<span class="inputElem">
+				<input name="regEmail" type="email" ng-model="zoomcar.register.email" placeholder="Email Address" required="true" validate-email />
+			</span>
+
+			<span class="statusMessage" ng-messages="registerForm.regEmail.$error" ng-if="registerForm.regEmail.$dirty">
+				<span class="sprites"></span>													
+				<span class="message" ng-message="required" ng-if="registerForm.regEmail.$error.required">Required Field</span>				
+				<span class="message" ng-message="validateEmail" ng-if="!registerForm.regEmail.$error.required">
+					Email must be entered in correct format</span>								
+
+			</span>						
+		</div>				  
+		<div class="formElem" ng-class='{success:zoomcar.registerStatus.isUsernameAvailable,error:registerForm.regUname.$dirty && registerForm.regUname.$invalid}'>
+			<span class="inputElem">
+				<input name="regUname" type="text" ng-model="zoomcar.register.uname" placeholder="Username" required="true" check-username-availability />
+			</span>
+			<span class="statusMessage" ng-messages="registerForm.regUname.$error" ng-if="registerForm.regUname.$dirty">
+				<span class="sprites"></span>
+				<span class="message" ng-message="required" ng-if="registerForm.regUname.$error.required">Required Field</span>				
+			</span>
+		</div>					
+		<div class="formElem" ng-class='{success:zoomcar.registerStatus.isPwdAvailable,error:registerForm.regPwd.$dirty && registerForm.regPwd.$invalid}'>
+			<span class="inputElem">
+				<input name="regPwd" type="password" ng-model="zoomcar.register.pwd" placeholder="Password" required="true" update-pwd-status/>
+			</span>
+			<span class="statusMessage" ng-messages="registerForm.regPwd.$error" ng-if="registerForm.regPwd.$dirty">
+				<span class="sprites"></span>
+				<span class="message" ng-message="required" ng-if="registerForm.regPwd.$error.required">Required Field</span>				
+			</span>
+		</div>					
+		<div class="formElem lastField">
+			<a href="javascript:void(0)" class="loginRegButton" 
+			ng-class='{disabled:!registerForm.$valid}'
+			ng-click='registerUser(registerForm.$valid,func);'>Register</a>
+		</div>						
+		
+	  </form>
+	</script>	
+			<script type="text/javascript" src="js/zoomcarLogin.js"></script>
+</body>
+</html>						  
