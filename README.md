@@ -1,5 +1,7 @@
 # todo-angular
 
+ <a href="https://gotogsk85.github.io/todo-angular/zoomcar.html" target="_blank">Demo</a>
+ 
 - Run zoomcar.html file in local
 - Register with a new user
 - after registering - login with the same registered user
